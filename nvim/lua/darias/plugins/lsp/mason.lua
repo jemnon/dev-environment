@@ -28,9 +28,8 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"cssls",
-				"emmet_ls",
 				"graphql",
-				"html",
+				"eslint",
 				"lua_ls",
 				"marksman",
 				"mdx_analyzer",
@@ -51,7 +50,7 @@ return {
 				"isort", -- python formatter
 				"black", -- python formatter
 				"pylint", -- python linter
-				"eslint_d", -- js linter
+				"eslint", -- js linter
 			},
 		})
 	end,
