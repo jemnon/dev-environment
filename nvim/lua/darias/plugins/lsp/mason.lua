@@ -33,9 +33,7 @@ return {
 				"lua_ls",
 				"marksman",
 				"mdx_analyzer",
-				"prismals",
-				"pyright",
-				"tailwindcss",
+				--"pyright",
 				"tsserver",
 				"yamlls",
 			},
@@ -49,7 +47,7 @@ return {
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
-				"pylint", -- python linter
+				--"pylint", -- python linter
 				"eslint", -- js linter
 			},
 		})

@@ -53,7 +53,7 @@ return {
 				formatting.isort,
 				formatting.eslint,
 				formatting.black,
-				diagnostics.pylint,
+				--diagnostics.pylint,
 				--diagnostics.eslint.with({ -- js/ts linter
 				-- diagnostics_format = "[eslint] #{m}\n(#{c})",
 				-- condition = function(utils)
