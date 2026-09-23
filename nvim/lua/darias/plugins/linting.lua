@@ -6,11 +6,7 @@ return {
 		local lint = require("lint")
 
 		lint.linters_by_ft = {
-			javascript = { "eslint" },
-			typescript = { "eslint" },
-			javascriptreact = { "eslint" },
-			typescriptreact = { "eslint" },
-			-- svelte = { "eslint" },
+			-- js/ts linting is handled by the eslint language server (see lsp/lspconfig.lua)
 			python = { "pylint" },
 		}
 

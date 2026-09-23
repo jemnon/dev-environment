@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master", -- master is frozen; main is an incompatible rewrite
 		event = { "BufReadPre", "BufNewFile" },
 		build = ":TSUpdate",
 		dependencies = {
@@ -8,12 +9,6 @@ return {
 			"windwp/nvim-ts-autotag",
 		},
 		config = function()
-			-- comment string
-			require("ts_context_commentstring").setup({
-				enable = true,
-				enable_autocmd = false,
-			})
-
 			-- import nvim-treesitter plugin
 			local treesitter = require("nvim-treesitter.configs")
 
@@ -24,10 +19,6 @@ return {
 				},
 				-- enable indentation
 				indent = { enable = true },
-				-- enable autotagging (w/ nvim-ts-autotag plugin)
-				autotag = {
-					enable = true,
-				},
 				-- ensure these language parsers are installed
 				ensure_installed = {
 					"json",
@@ -58,12 +49,28 @@ return {
 						node_decremental = "<bs>",
 					},
 				},
-				-- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-				-- context_commentstring = {
-				-- enable = true,
-				-- enable_autocmd = false,
-				-- },
 			})
+
+			-- enable autotagging
+			require("nvim-ts-autotag").setup()
+		end,
+	},
+	{
+		-- context-aware commentstring (tsx/jsx etc.) for neovim's built-in gc commenting
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false,
+			})
+
+			local get_option = vim.filetype.get_option
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.filetype.get_option = function(filetype, option)
+				return option == "commentstring"
+						and require("ts_context_commentstring.internal").calculate_commentstring()
+					or get_option(filetype, option)
+			end
 		end,
 	},
 }
